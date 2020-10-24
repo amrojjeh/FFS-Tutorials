@@ -16,22 +16,22 @@ import time
 # index: 3, fib: 2
 # index: 4, fib: 3
 def fib_linear(index):
-	prev = 1
-	prev_prev = 0
-	current = 1
-	for i in range(1, index):
-		current = prev + prev_prev
-		prev_prev = prev
-		prev = current
-	return current
+    prev = 1
+    prev_prev = 0
+    current = 1
+    for i in range(1, index):
+        current = prev + prev_prev
+        prev_prev = prev
+        prev = current
+    return current
 
 def fib_recursive(index):
-	if index <= 0:
-		return 0
-	if index == 1:
-		return 1
-	# index is guaranteed to be 2 at this point
-	return fib_recursive(index - 1) + fib_recursive(index - 2)
+    if index <= 0:
+        return 0
+    if index == 1:
+        return 1
+    # index is guaranteed to be 2 at this point
+    return fib_recursive(index - 1) + fib_recursive(index - 2)
 
 # Understanding the "normal" version (with index=5)
 # With any determinsitic recursive function, you should work top to bottom:
@@ -52,23 +52,23 @@ def fib_recursive(index):
 # Going through the process of writing it should make it much easier to understand
 
 def fib_recursive_optimized(index, a=0, b=1):
-	if index <= 0:
-		return a
-	if index == 1:
-		return b
-	return fib_recursive_optimized(index - 1, b, a + b)
+    if index <= 0:
+        return a
+    if index == 1:
+        return b
+    return fib_recursive_optimized(index - 1, b, a + b)
 
 # Understanding the optimized version (with index=5):
 # fib(5, 0, 1) = fib(4, 1, 1) = 5 |  0, 1, 1, 2, 3, 5
-#									^a  ^b
+#                                   ^a  ^b
 # fib(4, 1, 1) = fib(3, 1, 2) = 5 | 0, 1, 1, 2, 3, 5
-#									  ^a  ^b
+#                                     ^a  ^b
 # fib(3, 1, 2) = fib(2, 2, 3) = 5 | 0, 1, 1, 2, 3, 5
-#									      ^a ^b
+#                                         ^a ^b
 # fib(2, 2, 3) = fib(1, 3, 5) = 5 | 0, 1, 1, 2, 3, 5
-#										     ^a ^b
+#                                            ^a ^b
 # fib(1, 3, 5) = 5 | 0, 1, 2, 3, 5
-#							  ^a ^b
+#                             ^a ^b
 
 # The optimized function solves the sequence in its arugments!
 
